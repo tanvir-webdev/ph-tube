@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,32 @@
     <!-- daisy UI links -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- inter font links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <!-- css links -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-        <h1>Hello</h1>
+
+<body class="inter-regular">
+    <header class="w-11/12 mx-auto">
+        <nav class="mt-9 flex justify-between">
+            <div>
+                <img src="assets/Logo.png" alt="">
+            </div>
+            <div>
+                <button class="btn font-medium text-lg">Sort by viewport</button>
+            </div>
+            <div>
+                <button class="btn font-medium text-lg bg-[#FF1F3D] text-white">Blog</button>
+            </div>
+        </nav>
+        <hr class="my-8 border-gray-300">
     </header>
+    
 </body>
+
 </html>
