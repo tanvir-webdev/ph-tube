@@ -1,33 +1,41 @@
 
 
-function loadCategories(){
+function loadCategories() {
     fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
         .then(res => res.json())
         .then(data => categoriesData(data.categories))
 }
 
-function categoriesData(categories){
+const loadCategoriesVideos = (id) => {
+    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => allVideos(data.category))
+}
+
+function categoriesData(categories) {
     const btnContainer = document.getElementById('btn-container');
-    for(let cat of categories){
+    for (let cat of categories) {
         const catName = cat.category;
         const catButton = document.createElement('div');
         catButton.innerHTML = `
-            <button class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${catName}</button>
+            <button onclick="loadCategoriesVideos(${cat.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${catName}</button>
         `
         btnContainer.appendChild(catButton)
     }
 }
 
-const loadVideos = () =>{
+const loadVideos = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
         .then(res => res.json())
-        .then(data => allVideos(data))
+        .then(data => allVideos(data.videos))
 }
 
-const allVideos = (videos) =>{
-    const videosContainer = document.getElementById('videos-container')
-    const onlyVideos = videos.videos;
-    onlyVideos.forEach(element => {
+const allVideos = (videos) => {
+    const videosContainer = document.getElementById('videos-container');
+    videosContainer.innerHTML = ''
+    
+    videos.forEach(element => {
         console.log(element)
         const videoContent = document.createElement('div');
         videoContent.innerHTML = `
@@ -55,10 +63,10 @@ const allVideos = (videos) =>{
                 </div>
             </div>
         `
+        
         videosContainer.append(videoContent)
     });
 }
 
 
 loadCategories()
-loadVideos()
