@@ -1,3 +1,15 @@
+// Show/hide loader
+const showloader = ()=>{
+    document.getElementById('loader').classList.remove('hidden')
+    document.getElementById('videos-container').classList.add('hidden')
+
+}
+
+const hideloader = ()=>{
+    document.getElementById('loader').classList.add('hidden')
+    document.getElementById('videos-container').classList.remove('hidden')
+}
+
 // Remove all active class
 
 const removeActiveClass = () => {
@@ -5,6 +17,7 @@ const removeActiveClass = () => {
     for (let btn of allActiveClass) {
         btn.classList.remove('active')
     }
+    
 }
 
 // Load categories button - fetch
@@ -18,6 +31,7 @@ function loadCategories() {
 // categories buttons video - fetch
 
 const loadCategoriesVideos = (id) => {
+    showloader()
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
     fetch(url)
         .then(res => res.json())
@@ -28,6 +42,7 @@ const loadCategoriesVideos = (id) => {
             targetbutton.classList.add('active')
             allVideos(data.category)
         })
+    
 }
 
 // Create categories button 
@@ -47,6 +62,7 @@ function categoriesData(categories) {
 // Load all videos - fetch
 
 const loadVideos = (searchTitle = '') => {
+    showloader()
     fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchTitle}`)
         .then(res => res.json())
         .then(data => {
@@ -103,6 +119,7 @@ const allVideos = (videos) => {
                 <h2 class="font-bold text-3xl text-center">Oops!! Sorry, There is no <br> content here</h2>
         </div>
         `
+        hideloader()
         return
     }
     videos.forEach(element => {
@@ -137,6 +154,7 @@ const allVideos = (videos) => {
 
         videosContainer.append(videoContent)
     });
+    hideloader()
 }
 
 // Search input
