@@ -4,3 +4,8 @@
     font-weight: 400;
     font-style: normal;
 }
+
+.active {
+    background-color: #FF1F3D;
+    color: white;
+}
