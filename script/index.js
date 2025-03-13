@@ -46,8 +46,8 @@ function categoriesData(categories) {
 
 // Load all videos - fetch
 
-const loadVideos = () => {
-    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+const loadVideos = (searchTitle = '') => {
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchTitle}`)
         .then(res => res.json())
         .then(data => {
             removeActiveClass()
@@ -85,7 +85,7 @@ const displayVideosDetails = (details) => {
                 <p>${details.description}</p>
              </div>
          </div>
-    `
+    ` 
     modalInfo.append(div)
     my_modal_1.showModal()
 }
@@ -125,7 +125,7 @@ const allVideos = (videos) => {
                         <h2 class="font-bold">${element.title}</h2>
                         <h3 class="flex gap-2 text-sm text-[#17171770]">
                             ${element.authors[0]['profile_name']}
-                            <img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png" alt="" srcset="">
+                            ${element.authors[0]['verified'] === true ? `<img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png" alt="" srcset=""></img>` : ``}
                         </h3>
                         <p class="text-sm text-[#17171770]">${element.others.views}</p>
                         
@@ -138,6 +138,12 @@ const allVideos = (videos) => {
         videosContainer.append(videoContent)
     });
 }
+
+// Search input
+
+document.getElementById('search').addEventListener('keyup', (event)=>{
+    loadVideos(event.target.value)
+})
 
 // call categories button
 
